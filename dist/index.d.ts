@@ -1,0 +1,27 @@
+declare function isUndefined(value: any): value is undefined;
+declare function isNull(value: any): value is null;
+declare function isString(value: any): value is string;
+declare function isNumber(value: any): value is number;
+declare function isBoolean(value: any): value is boolean;
+declare function isFunction(value: any): value is Function;
+declare function isObject(value: any): value is object;
+declare function isArray(value: any): value is Array<any>;
+declare function isDate(value: any): value is Date;
+declare function isUndefinedOrNull(value: any): value is undefined | null;
+declare function isEmpty(value: any, options?: {
+    trim: boolean;
+}): boolean;
+declare function isNumeric(value: any): boolean;
+declare function isDecimal(value: any): boolean;
+declare function isPositiveDecimal(value: any): boolean;
+declare function isNegativeDecimal(value: any): boolean;
+declare function isInteger(value: any): boolean;
+declare function isPositiveInteger(value: any): boolean;
+declare function isNegativeInteger(value: any): boolean;
+declare function isAlpha(value: any): boolean;
+declare function isAlphaNumeric(value: any): boolean;
+declare function isTruthy(value: any): boolean;
+declare function isFalsy(value: any): boolean;
+declare function numberToString(value: any): string;
+declare function stringToNumber(value: any): number;
+declare function safeTrim(value: any): string;

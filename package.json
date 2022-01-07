@@ -1,0 +1,26 @@
+{
+  "name": "@neos21/neos-validators-js",
+  "version": "0.0.0",
+  "description": "Neo's Validators JavaScript / TypeScript",
+  "main": "./src/index.ts",
+  "scripts": {
+    "tsc": "tsc"
+  },
+  "author": "Neo <neos21@gmail.com> (https://neos21.net/)",
+  "license": "MIT",
+  "homepage": "https://github.com/Neos21/neos-validators-js#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Neos21/neos-validators-js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Neos21/neos-validators-js/issues"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/Neos21"
+  },
+  "devDependencies": {
+    "typescript": "4.5.4"
+  }
+}
