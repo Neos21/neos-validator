@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Google Search Console -->
     <meta name="google-site-verification" content="ls7kuvIKSqVa_dcixqKvFwl393swvYMkHCkG-xtlCj0">
-    <title>@neos21/neos-validator : Neo's Validator : ESM</title>
+    <title>@neos21/neos-validator : Neo's Validator : UMD</title>
     <link rel="icon" href="https://neos21.github.io/favicon.ico">
     <!-- Global Site Tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LP3ZQV2R3M"></script>
@@ -18,26 +18,25 @@
 html { font-family: sans-serif; text-decoration-skip-ink: none; cursor: default; }
 
     </style>
-    <script type="module">
-
-import NeosValidator from '../esm/index.js';  // Import Neo's Validator ESM
+    <script src="./umd.js"></script>
+    <script>
 
 document.addEventListener('DOMContentLoaded', () => {
-  if(NeosValidator == null) return alert('エラー : NeosValidator が存在しません');
-  console.log(NeosValidator);
-  console.log(NeosValidator.isString('Text'));
+  if(window.NeosValidator == null) return alert('エラー : window.NeosValidator が存在しません');
+  console.log(window.NeosValidator);
+  console.log(window.NeosValidator.isString('Text'));
 });
 
     </script>
   </head>
   <body>
 
-<h1>@neos21/neos-validator : Neo's Validator : ESM</h1>
+<h1>@neos21/neos-validator : Neo's Validator : UMD</h1>
 <p>
   <a href="https://www.npmjs.com/package/@neos21/neos-validator"><img src="https://img.shields.io/npm/v/@neos21/neos-validator.svg" alt="NPM Version" title="NPM Version"></a>
   <a href="https://github.com/Neos21/neos-validator/packages/__ID__"><img src="https://img.shields.io/github/package-json/v/neos21/neos-validator?label=github" alt="GPR Version" title="GPR Version"></a>
 </p>
-<p>See Console Log. <a href="./umd.html">UMD Version</a></p>
+<p>See Console Log. <a href="./index.html">ESM Version</a></p>
 
 <hr>
 <ul>

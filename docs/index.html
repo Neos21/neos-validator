@@ -20,7 +20,7 @@ html { font-family: sans-serif; text-decoration-skip-ink: none; cursor: default;
     </style>
     <script type="module">
 
-import NeosValidator from '../esm/index.js';  // Import Neo's Validator ESM
+import NeosValidator from './esm.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   if(NeosValidator == null) return alert('エラー : NeosValidator が存在しません');
