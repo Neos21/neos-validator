@@ -1,3 +1,73 @@
+// Neo's Validator
+// ==========
+
+// For CJS・UMD
+export {
+  isUndefined,
+  isNull,
+  isString,
+  isNumber,
+  isBoolean,
+  isFunction,
+  isObject,
+  isArray,
+  isDate,
+  
+  isUndefinedOrNull,
+  isEmpty,
+  
+  isNumeric,
+  isDecimal,
+  isPositiveDecimal,
+  isNegativeDecimal,
+  isInteger,
+  isPositiveInteger,
+  isNegativeInteger,
+  isAlpha,
+  isAlphaNumeric,
+  
+  isTruthy,
+  isFalsy,
+  
+  numberToString,
+  stringToNumber,
+  safeTrim
+};
+
+// For ESM
+export default {
+  isUndefined,
+  isNull,
+  isString,
+  isNumber,
+  isBoolean,
+  isFunction,
+  isObject,
+  isArray,
+  isDate,
+  
+  isUndefinedOrNull,
+  isEmpty,
+  
+  isNumeric,
+  isDecimal,
+  isPositiveDecimal,
+  isNegativeDecimal,
+  isInteger,
+  isPositiveInteger,
+  isNegativeInteger,
+  isAlpha,
+  isAlphaNumeric,
+  
+  isTruthy,
+  isFalsy,
+  
+  numberToString,
+  stringToNumber,
+  safeTrim
+};
+
+
 // 型判定
 // ==========
 
@@ -11,7 +81,7 @@ function isString(value: any): value is string {
   return Object.prototype.toString.call(value) === '[object String]';  // typeof だと new String() が object 扱いになってしまうのでコチラを使う
 }
 function isNumber(value: any): value is number {
-  return Object.prototype.toString.call(value) === '[object Number]';
+  return Object.prototype.toString.call(value) === '[object Number]' && !Number.isNaN(value);  // NaN は数値とみなさない
 }
 function isBoolean(value: any): value is boolean {
   return Object.prototype.toString.call(value) === '[object Boolean]';
@@ -60,35 +130,35 @@ function isDecimal(value: any): boolean {  // 正でも負でも数字なら tru
   if(isNumber(value)) value = String(value);
   if(!isString(value)) throw new Error('Invalid Type');
   if(isEmpty(value)) return false;  // 空文字は false にする
-  return (/^-?\d*(\.\d+)?$/).test(value);  // この正規表現は空文字も true になる
+  return (/^-?[0-9]*(\.[0-9]+)?$/).test(value);  // この正規表現は空文字も true になる
 }
 function isPositiveDecimal(value: any): boolean {  // 正の数字なら true (空文字、カンマは false。小数ピリオド以降に数字がないと false)
   if(isNumber(value)) value = String(value);
   if(!isString(value)) throw new Error('Invalid Type');
   if(isEmpty(value)) return false;  // 空文字は false にする
-  return (/^\d*(\.\d+)?$/).test(value);  // この正規表現は空文字も true になる
+  return (/^[0-9]*(\.[0-9]+)?$/).test(value);  // この正規表現は空文字も true になる
 }
 function isNegativeDecimal(value: any): boolean {  // 負の数字なら true (空文字、カンマは false。小数ピリオド以降に数字がないと false)
   if(isNumber(value)) value = String(value);
   if(!isString(value)) throw new Error('Invalid Type');
   if(isEmpty(value)) return false;  // 空文字は false にする
   if(value === '-') return false;  // ハイフンのみは false にする
-  return (/^-\d*(\.\d+)?$/).test(value);  // この正規表現は空文字やハイフンのみも true になる
+  return (/^-[0-9]*(\.[0-9]+)?$/).test(value);  // この正規表現は空文字やハイフンのみも true になる
 }
 function isInteger(value: any): boolean {  // 正でも負でも整数は true (空文字、カンマ、小数ピリオドなどが含まれていると false)
   if(isNumber(value)) value = String(value);  // 数字のみ文字列に変換して受け付ける
   if(!isString(value)) throw new Error('Invalid Type');  // 文字列でなければエラーにする
-  return (/^-?\d+$/).test(value);
+  return (/^-?[0-9]+$/).test(value);
 }
 function isPositiveInteger(value: any): boolean {  // 正の整数は true (空文字、カンマ、小数ピリオド、負数ハイフンなどが含まれていると false)
   if(isNumber(value)) value = String(value);
   if(!isString(value)) throw new Error('Invalid Type');
-  return (/^\d+$/).test(value);
+  return (/^[0-9]+$/).test(value);
 }
 function isNegativeInteger(value: any): boolean {  // 負の整数 (先頭に半角ピリオド) は true (空文字、カンマ、小数ピリオドなどが含まれていると false)
   if(isNumber(value)) value = String(value);
   if(!isString(value)) throw new Error('Invalid Type');
-  return (/^-\d+$/).test(value);
+  return (/^-[0-9]+$/).test(value);
 }
 // TODO : 電話番号・郵便番号のようにハイフン込みの数字文字列を判定する
 
@@ -134,7 +204,11 @@ function numberToString(value: any): string {
 }
 function stringToNumber(value: any): number {
   if(isNumber(value)) return value;  // 数字ならそのまま
-  if(isUndefinedOrNull(value) || isBoolean(value) || isString(value)) return Number(value);  // undefined は NaN、null は 0、true は 1、false は 0、空文字は 0、変換できなければ NaN になる
+  if(isUndefinedOrNull(value) || isBoolean(value) || isString(value)) {
+    const num = Number(value);  // undefined は NaN、null は 0、true は 1、false は 0、空文字は 0、変換できなければ NaN になる
+    if(Number.isNaN(num)) throw new Error('The Value Is NaN');  // NaN は弾く
+    return num;
+  }
   throw new Error('Invalid Type');  // それ以外の型はエラー
 }
 function safeTrim(value: any): string {

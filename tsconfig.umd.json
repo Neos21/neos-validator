@@ -1,0 +1,7 @@
+{
+  "extends": "./tsconfig.base",
+  "compilerOptions": {
+    "declaration": false,
+    "module": "ESNext"
+  }
+}

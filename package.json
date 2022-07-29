@@ -1,26 +1,46 @@
 {
-  "name": "@neos21/neos-validators-js",
+  "name": "@neos21/neos-validator",
   "version": "0.0.0",
-  "description": "Neo's Validators JavaScript / TypeScript",
-  "main": "./src/index.ts",
+  "description": "Neo's Validator",
+  "main": "./cjs/index.js",
+  "module": "./esm/index.js",
+  "types": "./cjs/index.d.js",
   "scripts": {
-    "tsc": "tsc"
+    "prebuild": "rimraf ./cjs ./esm ./umd",
+    "build": "npm run build:cjs && npm run build:esm && npm run build:umd",
+    "build:cjs": "tsc -p ./tsconfig.cjs.json",
+    "build:esm": "tsc -p ./tsconfig.esm.json",
+    "build:umd": "webpack",
+    "test": "npm run test:cjs && npm run test:ts",
+    "test:cjs": "node ./tests/cjs.js",
+    "test:ts": "ts-node ./tests/ts.ts",
+    "test:browser": "sirv --host=0.0.0.0 ./",
+    "ts-node": "ts-node",
+    "tsc": "tsc",
+    "sirv": "sirv",
+    "webpack": "webpack"
   },
   "author": "Neo <neos21@gmail.com> (https://neos21.net/)",
   "license": "MIT",
-  "homepage": "https://github.com/Neos21/neos-validators-js#readme",
+  "homepage": "https://github.com/Neos21/neos-validator#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Neos21/neos-validators-js.git"
+    "url": "git+https://github.com/Neos21/neos-validator.git"
   },
   "bugs": {
-    "url": "https://github.com/Neos21/neos-validators-js/issues"
+    "url": "https://github.com/Neos21/neos-validator/issues"
   },
   "funding": {
     "type": "github",
     "url": "https://github.com/sponsors/Neos21"
   },
   "devDependencies": {
-    "typescript": "4.5.4"
+    "rimraf": "3.0.2",
+    "sirv-cli": "2.0.2",
+    "ts-loader": "9.3.1",
+    "ts-node": "10.9.1",
+    "typescript": "4.5.4",
+    "webpack": "5.74.0",
+    "webpack-cli": "4.10.0"
   }
 }

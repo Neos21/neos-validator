@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "newLine": "lf",
+    "strict": true,
+    "target": "es5"  // es2016
+  },
+  "exclude": [
+    "./tests/**"
+  ]
+}
